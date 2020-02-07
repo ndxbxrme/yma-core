@@ -1,3 +1,7 @@
+styles = document.createElement 'style'
+styles.innerText = '.yma-router-parked, .yma-hidden {display:none}'
+document.querySelector 'head'
+.append styles
 module.exports =
   go: ->
     (scope, elem, props) ->
@@ -5,38 +9,59 @@ module.exports =
       scene = scope.router.parsePath props.go
       listener = (event) ->
         scope.router.go scene.name, scene.data
-      elem.addEventListener 'mousedown', listener
-      scope.$on 'teardown', ->
-        elem.removeEventListener 'mousedown', listener
-  hide: ->
+      scope.$addEventListeners elem, 'mousedown', listener
+  hide: (app) ->
     (scope, elem, props) ->
-      if props.hide and props.hide isnt 'false'
-        elem.className += ' hidden'
+      if props.hide and app.$eval props.hide, scope
+        app.$addClass elem, 'yma-hidden'
+  "if": (app) ->
+    pre: (scope, elem, props) ->
+      console.log 'if', props['if']
+      if props["if"] and app.$eval props["if"], scope
+        console.log 1
+        return [scope]
+      else
+        console.log 2
+        return []
   press: (app) ->
     (scope, elem, props) ->
-      console.log 'setting up press'
       if /\(/.test props.press
         listener = (event) ->
-          console.log 'pressed'
+          scope.$event = event
           app.$eval props.press, scope
+          delete scope.$event
       else
         listener = app.$eval props.press, scope
       if typeof(listener) is 'function'
-        elem.addEventListener 'mousedown', listener
-        scope.$on 'teardown', ->
-          elem.removeEventListener 'mousedown', listener
+        scope.$addEventListeners elem, ['mousedown', 'click'], listener
   repeat: (app) ->
+    hashes = []
     pre: (scope, elem, props) ->
-      arr = app.$eval(props.repeat, scope)
+      itemName = 'item'
+      repeat = props.repeat
+      repeat = repeat.replace /\sas\s([\w_]+)$/, (all, name) ->
+        itemName = name
+        ''
+      arr = app.$eval(repeat, scope)
       if arr
-        return arr.map (item, i) ->
+        results = arr.map (item, i) ->
+          hash = app.$hash JSON.stringify item
+          hashIndex = hashes.indexOf hash
           newscope = app.Scope scope
-          newscope.item = item
-          newscope.index = i
-          newscope.first = i is 0
-          newscope.last = i is arr.length - 1
-          newscope.dataid = app.$hash JSON.stringify app.$hashObject newscope
+          newscope[itemName] = item
+          newscope.$index = i
+          newscope.$first = i is 0
+          newscope.$last = i is arr.length - 1
+          newscope.$fresh = hashIndex is -1
+          newscope.$moveUp = hashIndex > i
+          newscope.$moveDown = hashIndex isnt -1 and hashIndex < i
+          newscope.$lastIndex = hashIndex
+          #newscope.$dataid = app.$hash JSON.stringify app.$hashObject newscope
           newscope
+        if scope.$phase is 'render'
+          hashes = results.map (scope) ->
+            app.$hash JSON.stringify scope[itemName]
+        return results
       else
         return []
   controller: (app) ->
@@ -151,14 +176,14 @@ module.exports =
     (scope, elem, props) ->
       setValue = ->
         if elem.value isnt app.$eval props.model
-          elem.value = app.$eval props.model, scope
+          value = app.$getScopeVar props.model, scope
+          elem.value = value if typeof(value) isnt 'undefined'
       setValue()
       updateModel = (event) ->
         scope[props.model] = elem.value
+        app.$setScopeVar props.model, elem.value, scope
         scope.$update()
-      elem.addEventListener 'keyup', updateModel
-      scope.$on 'teardown', ->
-        elem.removeEventListener 'keyup', updateModel
+      scope.$addEventListeners elem, ['keyup', 'change', 'paste', 'mouseup'], updateModel
       scope.$on 'update', setValue
   autofocus: ->
     (scope, elem) ->
