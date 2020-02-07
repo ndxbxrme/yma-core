@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "controller.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\controller.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACP,YAAA;QAAI,IAAA,GAAO,GAAG,CAAC,UAAU,CAAC,KAAK,CAAC,UAAU,CAAC,WAAjB,CAAA,CAAD;QACrB,IAAyB,IAAzB;UAAA,IAAI,CAAC,UAAL,CAAgB,KAAhB,EAAA;;eACA;MAHG;IAAL;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  pre: (scope, elem, props) ->\r\n    ctrl = app.components[props.controller.toUpperCase()]\r\n    ctrl.controller scope if ctrl\r\n    null\r\n"
+  ]
+}

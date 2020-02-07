@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "autofocus.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\autofocus.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAA,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,CAAA;aACE,IAAI,CAAC,KAAL,CAAA;IADF;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = ->\r\n  (scope, elem) ->\r\n    elem.focus()\r\n"
+  ]
+}

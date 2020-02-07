@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "if.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\if.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;QACH,IAAG,KAAK,CAAC,IAAD,CAAL,IAAgB,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,IAAD,CAAf,EAAuB,KAAvB,CAAnB;AACE,iBAAO,CAAC,KAAD,EADT;SAAA,MAAA;AAGE,iBAAO,GAHT;;MADG;IAAL;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  pre: (scope, elem, props) ->\r\n    if props[\"if\"] and app.$eval props[\"if\"], scope\r\n      return [scope]\r\n    else\r\n      return []\r\n"
+  ]
+}

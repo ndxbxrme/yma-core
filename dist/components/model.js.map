@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "model.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\model.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACF,UAAA,QAAA,EAAA;MAAI,QAAA,GAAW,QAAA,CAAA,CAAA;AACf,YAAA;QAAM,IAAG,IAAI,CAAC,KAAL,KAAgB,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,KAAhB,CAAnB;UACE,KAAA,GAAQ,GAAG,CAAC,YAAJ,CAAiB,KAAK,CAAC,KAAvB,EAA8B,KAA9B;UACR,IAAsB,OAAO,KAAP,KAAmB,WAAzC;mBAAA,IAAI,CAAC,KAAL,GAAa,MAAb;WAFF;;MADS;MAIX,QAAA,CAAA;MACA,WAAA,GAAc,QAAA,CAAC,KAAD,CAAA;QACZ,KAAK,CAAC,KAAK,CAAC,KAAP,CAAL,GAAqB,IAAI,CAAC;QAC1B,GAAG,CAAC,YAAJ,CAAiB,KAAK,CAAC,KAAvB,EAA8B,IAAI,CAAC,KAAnC,EAA0C,KAA1C;eACA,KAAK,CAAC,OAAN,CAAA;MAHY;MAId,KAAK,CAAC,kBAAN,CAAyB,IAAzB,EAA+B,CAAC,OAAD,EAAU,QAAV,EAAoB,OAApB,EAA6B,SAA7B,CAA/B,EAAwE,WAAxE;aACA,KAAK,CAAC,GAAN,CAAU,QAAV,EAAoB,QAApB;IAXF;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  (scope, elem, props) ->\r\n    setValue = ->\r\n      if elem.value isnt app.$eval props.model\r\n        value = app.$getScopeVar props.model, scope\r\n        elem.value = value if typeof(value) isnt 'undefined'\r\n    setValue()\r\n    updateModel = (event) ->\r\n      scope[props.model] = elem.value\r\n      app.$setScopeVar props.model, elem.value, scope\r\n      scope.$update()\r\n    scope.$addEventListeners elem, ['keyup', 'change', 'paste', 'mouseup'], updateModel\r\n    scope.$on 'update', setValue\r\n"
+  ]
+}
