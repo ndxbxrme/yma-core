@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "go.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\go.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAA,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACF,UAAA,QAAA,EAAA;MAAI,KAAK,CAAC,IAAN,CAAW,QAAX;MACA,KAAA,GAAQ,KAAK,CAAC,MAAM,CAAC,SAAb,CAAuB,KAAK,CAAC,EAA7B;MACR,QAAA,GAAW,QAAA,CAAC,KAAD,CAAA;eACT,KAAK,CAAC,MAAM,CAAC,EAAb,CAAgB,KAAK,CAAC,IAAtB,EAA4B,KAAK,CAAC,IAAlC;MADS;aAEX,KAAK,CAAC,kBAAN,CAAyB,IAAzB,EAA+B,WAA/B,EAA4C,QAA5C;IALF;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = ->\r\n  (scope, elem, props) ->\r\n    scope.$use 'router'\r\n    scene = scope.router.parsePath props.go\r\n    listener = (event) ->\r\n      scope.router.go scene.name, scene.data\r\n    scope.$addEventListeners elem, 'mousedown', listener\r\n"
+  ]
+}

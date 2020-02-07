@@ -1,10 +1,10 @@
 {
   "name": "yma-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "coffee -c -m -o dist/main.js src/index.coffee",
+    "build": "coffee -m -o dist -c src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

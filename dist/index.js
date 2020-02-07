@@ -9,17 +9,7 @@
   document.querySelector('head').append(styles);
 
   module.exports = {
-    go: function() {
-      return function(scope, elem, props) {
-        var listener, scene;
-        scope.$use('router');
-        scene = scope.router.parsePath(props.go);
-        listener = function(event) {
-          return scope.router.go(scene.name, scene.data);
-        };
-        return scope.$addEventListeners(elem, 'mousedown', listener);
-      };
-    },
+    go: require('/components/go'),
     hide: function(app) {
       return function(scope, elem, props) {
         if (props.hide && app.$eval(props.hide, scope)) {
@@ -311,4 +301,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=index.js.map
