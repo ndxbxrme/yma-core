@@ -2,6 +2,7 @@
 (function() {
   module.exports = function(app) {
     var bootstrapped, callbacks, checkScenePath, currentscene, go, parsePath, rendered, routerScope, scenes;
+    app.$appendStyles('.yma-router-parked {display:none}');
     callbacks = app.Callbacks();
     scenes = {};
     currentscene = null;

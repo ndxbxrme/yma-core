@@ -6,8 +6,8 @@
     "src\\index.coffee"
   ],
   "names": [],
-  "mappings": ";AAAA;AAAA,MAAA;;EAAA,MAAA,GAAS,QAAQ,CAAC,aAAT,CAAuB,OAAvB;;EACT,MAAM,CAAC,SAAP,GAAmB;;EACnB,QAAQ,CAAC,aAAT,CAAuB,MAAvB,CACA,CAAC,MADD,CACQ,MADR;;EAEA,MAAM,CAAC,OAAP,GACE;IAAA,EAAA,EAAI,OAAA,CAAQ,iBAAR,CAAJ;IACA,IAAA,EAAM,OAAA,CAAQ,mBAAR,CADN;IAEA,IAAA,EAAM,OAAA,CAAQ,iBAAR,CAFN;IAGA,KAAA,EAAO,OAAA,CAAQ,oBAAR,CAHP;IAIA,MAAA,EAAQ,OAAA,CAAQ,qBAAR,CAJR;IAKA,UAAA,EAAY,OAAA,CAAQ,yBAAR,CALZ;IAMA,MAAA,EAAQ,OAAA,CAAQ,qBAAR,CANR;IAOA,KAAA,EAAO,OAAA,CAAQ,oBAAR,CAPP;IAQA,SAAA,EAAW,OAAA,CAAQ,wBAAR;EARX;AALF",
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GACE;IAAA,EAAA,EAAI,OAAA,CAAQ,iBAAR,CAAJ;IACA,IAAA,EAAM,OAAA,CAAQ,mBAAR,CADN;IAEA,IAAA,EAAM,OAAA,CAAQ,iBAAR,CAFN;IAGA,KAAA,EAAO,OAAA,CAAQ,oBAAR,CAHP;IAIA,MAAA,EAAQ,OAAA,CAAQ,qBAAR,CAJR;IAKA,UAAA,EAAY,OAAA,CAAQ,yBAAR,CALZ;IAMA,MAAA,EAAQ,OAAA,CAAQ,qBAAR,CANR;IAOA,KAAA,EAAO,OAAA,CAAQ,oBAAR,CAPP;IAQA,SAAA,EAAW,OAAA,CAAQ,wBAAR;EARX;AADF",
   "sourcesContent": [
-    "styles = document.createElement 'style'\r\nstyles.innerText = '.yma-router-parked, .yma-hidden {display:none}'\r\ndocument.querySelector 'head'\r\n.append styles\r\nmodule.exports =\r\n  go: require './components/go'\r\n  hide: require './components/hide'\r\n  \"if\": require './components/if'\r\n  press: require './components/press'\r\n  repeat: require './components/repeat'\r\n  controller: require './components/controller'\r\n  router: require './components/router'\r\n  model: require './components/model'\r\n  autofocus: require './components/autofocus'\r\n"
+    "module.exports =\r\n  go: require './components/go'\r\n  hide: require './components/hide'\r\n  \"if\": require './components/if'\r\n  press: require './components/press'\r\n  repeat: require './components/repeat'\r\n  controller: require './components/controller'\r\n  router: require './components/router'\r\n  model: require './components/model'\r\n  autofocus: require './components/autofocus'\r\n"
   ]
 }

@@ -6,8 +6,8 @@
     "src\\components\\hide.coffee"
   ],
   "names": [],
-  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;MACE,IAAG,KAAK,CAAC,IAAN,IAAe,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,IAAhB,EAAsB,KAAtB,CAAlB;eACE,GAAG,CAAC,SAAJ,CAAc,IAAd,EAAoB,YAApB,EADF;;IADF;EADe;AAAjB",
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;IACf,GAAG,CAAC,aAAJ,CAAkB,4BAAlB;WACA,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;MACE,IAAG,KAAK,CAAC,IAAN,IAAe,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,IAAhB,EAAsB,KAAtB,CAAlB;eACE,GAAG,CAAC,SAAJ,CAAc,IAAd,EAAoB,YAApB,EADF;;IADF;EAFe;AAAjB",
   "sourcesContent": [
-    "module.exports = (app) ->\r\n  (scope, elem, props) ->\r\n    if props.hide and app.$eval props.hide, scope\r\n      app.$addClass elem, 'yma-hidden'\r\n"
+    "module.exports = (app) ->\r\n  app.$appendStyles '.yma-hidden {display:none}'\r\n  (scope, elem, props) ->\r\n    if props.hide and app.$eval props.hide, scope\r\n      app.$addClass elem, 'yma-hidden'\r\n"
   ]
 }
