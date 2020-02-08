@@ -1,7 +1,3 @@
-styles = document.createElement 'style'
-styles.innerText = '.yma-router-parked, .yma-hidden {display:none}'
-document.querySelector 'head'
-.append styles
 module.exports =
   go: require './components/go'
   hide: require './components/hide'

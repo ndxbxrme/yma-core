@@ -1,4 +1,5 @@
 module.exports = (app) ->
+  app.$appendStyles '.yma-router-parked {display:none}'
   callbacks = app.Callbacks()
   scenes = {}
   currentscene = null
