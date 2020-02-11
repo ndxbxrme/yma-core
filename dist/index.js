@@ -9,7 +9,9 @@
     controller: require('./components/controller'),
     router: require('./components/router'),
     model: require('./components/model'),
-    autofocus: require('./components/autofocus')
+    autofocus: require('./components/autofocus'),
+    form: require('./components/form'),
+    required: require('./components/required')
   };
 
 }).call(this);

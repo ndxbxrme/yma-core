@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "required.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\required.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA,YAAA,EAAA,cAAA,EAAA;;EAAA,CAAA,CAAC,cAAD,EAAiB,YAAjB,EAA+B,eAA/B,CAAA,GAAkD,OAAA,CAAQ,UAAR,CAAlD;;EAGA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACP,YAAA,UAAA,EAAA;QAAI,WAAA,GAAc,cAAA,CAAe,IAAf;QACd,WAAW,CAAC,KAAK,CAAC,IAAP,CAAX,GAA0B,WAAW,CAAC,KAAK,CAAC,IAAP,CAAX,IAA2B,CAAA;QACrD,WAAW,CAAC,KAAK,CAAC,IAAP,CAAY,CAAC,WAAxB,GAAsC,WAAW,CAAC,KAAK,CAAC,IAAP,CAAY,CAAC,WAAxB,IAAuC;QAC7E,UAAA,GAAa,QAAA,CAAA,CAAA;UACX,IAAG,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,QAAhB,CAAH;YACE,IAAG,WAAW,CAAC,KAAK,CAAC,IAAP,CAAY,CAAC,MAAxB,IAAmC,WAAW,CAAC,KAAK,CAAC,IAAP,CAAY,CAAC,MAAxB,KAAoC,CAA1E;qBACE,eAAA,CAAgB,UAAhB,EAA4B,IAA5B,EAAkC,KAAlC,EADF;aAAA,MAAA;qBAGE,YAAA,CAAa,UAAb,EAAyB,IAAzB,EAA+B,KAA/B,EAHF;aADF;;QADW;QAMb,WAAW,CAAC,KAAK,CAAC,IAAP,CAAY,CAAC,WAAW,CAAC,IAApC,CAAyC,UAAzC;eACA,UAAA,CAAA;MAXG;IAAL;EADe;AAHjB",
+  "sourcesContent": [
+    "{getFormElement, addFormError, removeFormError} = require './common'\r\n\r\n\r\nmodule.exports = (app) ->\r\n  pre: (scope, elem, props) ->\r\n    formElement = getFormElement elem\r\n    formElement[props.name] = formElement[props.name] or {}\r\n    formElement[props.name].$validators = formElement[props.name].$validators or []\r\n    doValidate = ->\r\n      if app.$eval props.required\r\n        if formElement[props.name].$value and formElement[props.name].$value isnt 0\r\n          removeFormError 'required', elem, props\r\n        else\r\n          addFormError 'required', elem, props\r\n    formElement[props.name].$validators.push doValidate\r\n    doValidate()\r\n"
+  ]
+}

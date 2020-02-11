@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "form.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\form.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;AACjB,QAAA;IAAE,KAAA,GAAQ;WACR;MAAA,UAAA,EAAY,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACd,YAAA,KAAA,EAAA;QAAI,IAAG,KAAK,CAAC,IAAT;UACE,IAAG,KAAK,CAAC,IAAT;YACE,KAAA,GAAQ,CAAA;YAER,GAAG,CAAC,YAAJ,CAAiB,KAAK,CAAC,IAAvB,EAA6B,KAA7B,EAAoC,KAAK,CAAC,OAA1C;YACA,GAAG,CAAC,YAAJ,CAAiB,KAAK,CAAC,IAAvB,EAA6B,KAA7B,EAAoC,KAApC;YACA,KAAA,GAAQ,GAAG,CAAC,YAAJ,CAAiB,KAAK,CAAC,IAAvB,EAA6B,KAA7B;YACR,IAAG,KAAK,CAAC,MAAT;cACE,MAAA,GAAS,QAAA,CAAC,KAAD,CAAA;gBACP,KAAK,CAAC,MAAN,GAAe;gBACf,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,MAAhB,EAAwB,KAAxB;gBACA,KAAK,CAAC,cAAN,GAAuB;uBACvB;cAJO;cAKT,GAAG,CAAC,iBAAJ,CAAsB,QAAtB,EAAgC,MAAhC,EANF;aANF;;iBAaA,MAdF;;MADU;IAAZ;EAFe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  count = 0\r\n  controller: (scope, elem, props) ->\r\n    if props.name\r\n      if props.name\r\n        myvar = {}\r\n\r\n        app.$setScopeVar props.name, myvar, scope.$parent\r\n        app.$setScopeVar props.name, myvar, scope\r\n        myvar = app.$getScopeVar props.name, scope\r\n        if props.submit\r\n          submit = (event) ->\r\n            scope.$event = event\r\n            app.$eval props.submit, scope\r\n            event.preventDefault = true\r\n            false\r\n          add.$addEventListener 'submit', submit\r\n      myvar\r\n"
+  ]
+}
