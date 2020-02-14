@@ -21,6 +21,8 @@
   "homepage": "https://github.com/ndxbxrme/yma-core#readme",
   "devDependencies": {
     "local-web-server": "^4.0.0",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
     "puppeteer": "^2.1.1",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
