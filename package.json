@@ -1,11 +1,13 @@
 {
   "name": "yma-core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "build": "coffee -m -o dist -c src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "coffee -mw -o dist -c src",
+    "build-tests": "coffee -o test -c test && pug test && cd test && for /d %i in (*) do @cd %i && npx webpack --mode production && cd ..",
+    "test": "coffee -o test -c test && pug test && nodeunit test/test.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/ndxbxrme/yma-core/issues"
   },
-  "homepage": "https://github.com/ndxbxrme/yma-core#readme"
+  "homepage": "https://github.com/ndxbxrme/yma-core#readme",
+  "devDependencies": {
+    "local-web-server": "^4.0.0",
+    "puppeteer": "^2.1.1",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "yma": "git+https://github.com/ndxbxrme/yma.git"
+  }
 }

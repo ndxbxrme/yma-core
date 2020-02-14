@@ -10,3 +10,4 @@ module.exports =
   autofocus:  require './components/autofocus'
   form:       require './components/form'
   required:   require './components/required'
+  fetch:      require './components/fetch'

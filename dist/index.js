@@ -11,7 +11,8 @@
     model: require('./components/model'),
     autofocus: require('./components/autofocus'),
     form: require('./components/form'),
-    required: require('./components/required')
+    required: require('./components/required'),
+    fetch: require('./components/fetch')
   };
 
 }).call(this);

@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "fetch.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\fetch.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;IACf,GAAG,CAAC,SAAJ,GAAgB;IAChB,GAAG,CAAC,UAAJ,GAAiB;WACjB,QAAA,CAAC,OAAD,CAAA;aACE,IAAI,OAAJ,CAAY,MAAA,QAAA,CAAC,OAAD,EAAU,MAAV,CAAA;AAChB,YAAA,CAAA,EAAA,EAAA,EAAA,CAAA,EAAA,CAAA,EAAA,GAAA,EAAA,GAAA,EAAA,IAAA,EAAA,GAAA,EAAA,IAAA,EAAA,IAAA,EAAA,GAAA,EAAA;AAAM;AACE;UAAA,KAAA,qCAAA;;YAAA,MAAM,EAAA,CAAG,OAAH;UAAN;UACA,IAAG,OAAO,CAAC,SAAX;AACE;YAAA,KAAA,wCAAA;;cAAA,MAAM,EAAA,CAAG,OAAH;YAAN,CADF;WAFF;SAIA,aAAA;UAAM;AACJ,iBAAO,MAAA,CAAO,CAAP,EADT;;QAEA,OAAO,CAAC,MAAR,GAAiB,OAAO,CAAC,MAAR,IAAkB;QACnC,GAAA,GAAM,IAAI,cAAJ,CAAA;QACN,IAAG,OAAO,CAAC,OAAX;AACE;UAAA,KAAA,WAAA;;YAAA,GAAG,CAAC,gBAAJ,CAAqB,GAArB,EAA0B,KAA1B;UAAA,CADF;;QAEA,GAAG,CAAC,gBAAJ,CAAqB,cAArB,EAAqC,kCAArC;eACA,GAAG,CAAC,kBAAJ,GAAyB,MAAA,QAAA,CAAA,CAAA;AAC/B,cAAA,CAAA,EAAA,CAAA,EAAA,IAAA,EAAA,IAAA,EAAA,IAAA,EAAA;UAAQ,IAAG,IAAC,CAAC,UAAF,KAAgB,CAAnB;AACE;AACE;cAAA,KAAA,wCAAA;;gBAAA,MAAM,EAAA,CAAG,IAAH;cAAN;cACA,IAAG,OAAO,CAAC,UAAX;AACE;gBAAA,KAAA,wCAAA;;kBAAA,MAAM,EAAA,CAAG,IAAH;gBAAN,CADF;eAFF;aAIA,aAAA;cAAM;AACJ,qBAAO,MAAA,CAAO,CAAP,EADT;;mBAEA,OAAA,CAAQ,IAAR,EAPF;;QADuB;MAZf,CAAZ;IADF;EAHe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  app.$preFetch = []\r\n  app.$postFetch = []\r\n  (options) ->\r\n    new Promise (resolve, reject) ->\r\n      try\r\n        await fn options for fn in app.$preFetch\r\n        if options.$preFetch\r\n          await fn options for fn in options.$preFetch\r\n      catch e\r\n        return reject e\r\n      options.method = options.method or 'GET'\r\n      req = new XMLHttpRequest()\r\n      if options.headers\r\n        req.setRequestHeader key, value for key, value of options.headers\r\n      req.setRequestHeader 'Content-Type', 'application/x-www-form-urlencode'\r\n      req.onreadystatechange = ->\r\n        if @.readyState is 4\r\n          try\r\n            await fn @ for fn in app.$postFetch\r\n            if options.$postFetch\r\n              await fn @ for fn in options.$postFetch\r\n          catch e\r\n            return reject e\r\n          resolve @\r\n"
+  ]
+}
