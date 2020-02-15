@@ -8,4 +8,4 @@ module.exports = (app) ->
     else
       listener = app.$eval props.press, scope
     if typeof(listener) is 'function'
-      scope.$addEventListeners elem, ['mousedown', 'click'], listener
+      scope.$addEventListeners elem, ['click'], listener

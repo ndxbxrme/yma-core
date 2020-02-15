@@ -13,7 +13,7 @@
         listener = app.$eval(props.press, scope);
       }
       if (typeof listener === 'function') {
-        return scope.$addEventListeners(elem, ['mousedown', 'click'], listener);
+        return scope.$addEventListeners(elem, ['click'], listener);
       }
     };
   };

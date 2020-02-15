@@ -25,7 +25,9 @@
   };
 
   gotoPage = async function(path) {
-    browser = (await puppeteer.launch());
+    browser = (await puppeteer.launch({
+      headless: true
+    }));
     page = (await browser.newPage());
     return (await page.goto('http://localhost:23232/' + (path || '')));
   };
@@ -105,6 +107,47 @@
       test.ok((await page.evaluate(function() {
         return document.querySelector('scene[name="about"].yma-router-parked');
       })));
+      await closePage();
+      return test.done();
+    },
+    "Should press a button and update scope variable": async function(test) {
+      var val;
+      makeServer('test/press-basic');
+      await gotoPage('');
+      await waitForRendered();
+      val = (await page.evaluate(function() {
+        return new Promise(function(resolve) {
+          window.app.$once('updated', function() {
+            return resolve(document.querySelector('h1').innerHTML);
+          });
+          return document.querySelector('a').click();
+        });
+      }));
+      test.equals(val, 'boom');
+      await closePage();
+      return test.done();
+    },
+    "Should do a basic repeater test": async function(test) {
+      var val;
+      makeServer('test/repeater-basic');
+      await gotoPage('');
+      await waitForRendered();
+      val = (await page.evaluate(function() {
+        return document.querySelector('app').innerHTML;
+      }));
+      test.equals(val, '<h1>0 BARRY</h1><h1>1 BUDDY</h1><h1>2 MAGGIE</h1><h1>3 TEDDY</h1>');
+      await closePage();
+      return test.done();
+    },
+    "Should do a large repeater test": async function(test) {
+      var val;
+      makeServer('test/repeater-large');
+      await gotoPage('');
+      await waitForRendered();
+      val = (await page.evaluate(function() {
+        return document.querySelectorAll('h1').length;
+      }));
+      test.equals(val, 10000);
       await closePage();
       return test.done();
     }

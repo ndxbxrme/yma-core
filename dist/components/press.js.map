@@ -6,8 +6,8 @@
     "src\\components\\press.coffee"
   ],
   "names": [],
-  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACF,UAAA;MAAI,IAAG,IAAI,CAAC,IAAL,CAAU,KAAK,CAAC,KAAhB,CAAH;QACE,QAAA,GAAW,QAAA,CAAC,KAAD,CAAA;UACT,KAAK,CAAC,MAAN,GAAe;UACf,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,KAAhB,EAAuB,KAAvB;iBACA,OAAO,KAAK,CAAC;QAHJ,EADb;OAAA,MAAA;QAME,QAAA,GAAW,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,KAAhB,EAAuB,KAAvB,EANb;;MAOA,IAAG,OAAO,QAAP,KAAoB,UAAvB;eACE,KAAK,CAAC,kBAAN,CAAyB,IAAzB,EAA+B,CAAC,WAAD,EAAc,OAAd,CAA/B,EAAuD,QAAvD,EADF;;IARF;EADe;AAAjB",
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACF,UAAA;MAAI,IAAG,IAAI,CAAC,IAAL,CAAU,KAAK,CAAC,KAAhB,CAAH;QACE,QAAA,GAAW,QAAA,CAAC,KAAD,CAAA;UACT,KAAK,CAAC,MAAN,GAAe;UACf,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,KAAhB,EAAuB,KAAvB;iBACA,OAAO,KAAK,CAAC;QAHJ,EADb;OAAA,MAAA;QAME,QAAA,GAAW,GAAG,CAAC,KAAJ,CAAU,KAAK,CAAC,KAAhB,EAAuB,KAAvB,EANb;;MAOA,IAAG,OAAO,QAAP,KAAoB,UAAvB;eACE,KAAK,CAAC,kBAAN,CAAyB,IAAzB,EAA+B,CAAC,OAAD,CAA/B,EAA0C,QAA1C,EADF;;IARF;EADe;AAAjB",
   "sourcesContent": [
-    "module.exports = (app) ->\r\n  (scope, elem, props) ->\r\n    if /\\(/.test props.press\r\n      listener = (event) ->\r\n        scope.$event = event\r\n        app.$eval props.press, scope\r\n        delete scope.$event\r\n    else\r\n      listener = app.$eval props.press, scope\r\n    if typeof(listener) is 'function'\r\n      scope.$addEventListeners elem, ['mousedown', 'click'], listener\r\n"
+    "module.exports = (app) ->\r\n  (scope, elem, props) ->\r\n    if /\\(/.test props.press\r\n      listener = (event) ->\r\n        scope.$event = event\r\n        app.$eval props.press, scope\r\n        delete scope.$event\r\n    else\r\n      listener = app.$eval props.press, scope\r\n    if typeof(listener) is 'function'\r\n      scope.$addEventListeners elem, ['click'], listener\r\n"
   ]
 }
