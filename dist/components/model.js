@@ -40,8 +40,8 @@
             await validator(elem.value);
           }
         }
-        scope[props.model] = elem.value;
         if (typeof value !== 'undefined') {
+          //scope[props.model] = elem.value
           if (formElement != null) {
             formElement[props.name].$value = elem.value;
           }
