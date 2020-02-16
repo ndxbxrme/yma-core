@@ -12,7 +12,7 @@ makeServer = (path) ->
     spa: 'index.html'
 gotoPage = (path) ->
   browser = await puppeteer.launch
-    headless: false
+    headless: true
   page = await browser.newPage()
   await page.goto 'http://localhost:23232/' + (path or '')
 closePage = ->
