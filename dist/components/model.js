@@ -32,7 +32,7 @@
       };
       setValue();
       updateModel = async function(event) {
-        var i, len, ref, validator;
+        var i, len, ref, updateData, validator;
         if (formElement != null ? formElement[props.name].$validators : void 0) {
           ref = formElement[props.name].$validators;
           for (i = 0, len = ref.length; i < len; i++) {
@@ -41,13 +41,14 @@
           }
         }
         scope[props.model] = elem.value;
-        app.$setScopeVar(props.model, elem.value, scope);
         if (typeof value !== 'undefined') {
           if (formElement != null) {
             formElement[props.name].$value = elem.value;
           }
         }
-        return scope.$update();
+        updateData = {};
+        updateData[props.model] = elem.value;
+        return scope.$update(updateData);
       };
       scope.$addEventListeners(elem, ['keyup', 'change', 'paste', 'mouseup'], updateModel);
       return scope.$on('update', setValue);
