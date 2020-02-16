@@ -26,7 +26,7 @@
 
   gotoPage = async function(path) {
     browser = (await puppeteer.launch({
-      headless: true
+      headless: false
     }));
     page = (await browser.newPage());
     return (await page.goto('http://localhost:23232/' + (path || '')));
@@ -103,6 +103,19 @@
       })));
       test.ok((await page.evaluate(function() {
         return document.querySelector('scene[name="home"].yma-router-parked');
+      })));
+      test.ok((await page.evaluate(function() {
+        return document.querySelector('scene[name="about"].yma-router-parked');
+      })));
+      await closePage();
+      return test.done();
+    },
+    "Should display router component": async function(test) {
+      makeServer('test/router-components');
+      await gotoPage('');
+      await waitForRendered();
+      test.ok((await page.evaluate(function() {
+        return document.querySelector('scene[name="home"].yma-router-active');
       })));
       test.ok((await page.evaluate(function() {
         return document.querySelector('scene[name="about"].yma-router-parked');

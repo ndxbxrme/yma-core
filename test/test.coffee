@@ -12,7 +12,7 @@ makeServer = (path) ->
     spa: 'index.html'
 gotoPage = (path) ->
   browser = await puppeteer.launch
-    headless: true
+    headless: false
   page = await browser.newPage()
   await page.goto 'http://localhost:23232/' + (path or '')
 closePage = ->
@@ -58,6 +58,14 @@ exports.ymaCoreTest =
     await waitForRendered()
     test.ok await page.evaluate () -> document.querySelector('scene[name="users"].yma-router-active')
     test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-parked')
+    test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-parked')
+    await closePage()
+    test.done()
+  "Should display router component": (test) ->
+    makeServer 'test/router-components'
+    await gotoPage ''
+    await waitForRendered()
+    test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-active')
     test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-parked')
     await closePage()
     test.done()
