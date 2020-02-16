@@ -26,7 +26,7 @@
 
   gotoPage = async function(path) {
     browser = (await puppeteer.launch({
-      headless: false
+      headless: true
     }));
     page = (await browser.newPage());
     return (await page.goto('http://localhost:23232/' + (path || '')));

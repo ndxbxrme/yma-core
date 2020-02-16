@@ -1,5 +1,6 @@
-{getFormElement} = require './common'
+
 module.exports = (app) ->
+  {getFormElement} = require('./common') app
   (scope, elem, props) ->
     formElement = getFormElement elem
     setValue = ->

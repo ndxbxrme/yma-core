@@ -1,14 +1,14 @@
-getFormElement = (elem) ->
-  node = elem
-  while node.parentNode and node.tagName isnt 'FORM'
-    node = node.parentNode
-  if node
-    formElement = app.$getElement(node).data
-    if typeof(formElement) is 'undefined'
-      formElement[props.name] = {}
-      formElement = formElement[props.name]
-  formElement
-module.exports =
+module.exports = (app) ->
+  getFormElement = (elem) ->
+    node = elem
+    while node.parentNode and node.tagName isnt 'FORM'
+      node = node.parentNode
+    if node
+      formElement = app.$getElement(node).data
+      if typeof(formElement) is 'undefined'
+        formElement[props.name] = {}
+        formElement = formElement[props.name]
+    formElement
   getFormElement: getFormElement
   addFormError: (error, elem, props) ->
     formElement = getFormElement elem
