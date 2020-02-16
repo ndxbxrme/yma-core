@@ -3,7 +3,7 @@ module.exports = (app) ->
     node = elem
     while node.parentNode and node.tagName isnt 'FORM'
       node = node.parentNode
-    if node
+    if node and node.tagName is 'FORM'
       formElement = app.$getElement(node).data
       if typeof(formElement) is 'undefined'
         formElement[props.name] = {}

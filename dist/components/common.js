@@ -8,7 +8,7 @@
       while (node.parentNode && node.tagName !== 'FORM') {
         node = node.parentNode;
       }
-      if (node) {
+      if (node && node.tagName === 'FORM') {
         formElement = app.$getElement(node).data;
         if (typeof formElement === 'undefined') {
           formElement[props.name] = {};

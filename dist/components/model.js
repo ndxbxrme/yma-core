@@ -13,25 +13,27 @@
           if (typeof value !== 'undefined') {
             elem.value = value;
           }
-          formElement[props.name] = formElement[props.name] || {};
-          if (typeof value !== 'undefined') {
-            formElement[props.name].$value = elem.value;
-          }
-          if (formElement[props.name].$validators) {
-            ref = formElement[props.name].$validators;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              validator = ref[i];
-              results.push((await validator(elem.value)));
+          if (formElement) {
+            formElement[props.name] = formElement[props.name] || {};
+            if (typeof value !== 'undefined') {
+              formElement[props.name].$value = elem.value;
             }
-            return results;
+            if (formElement[props.name].$validators) {
+              ref = formElement[props.name].$validators;
+              results = [];
+              for (i = 0, len = ref.length; i < len; i++) {
+                validator = ref[i];
+                results.push((await validator(elem.value)));
+              }
+              return results;
+            }
           }
         }
       };
       setValue();
       updateModel = async function(event) {
         var i, len, ref, validator;
-        if (formElement[props.name].$validators) {
+        if (formElement != null ? formElement[props.name].$validators : void 0) {
           ref = formElement[props.name].$validators;
           for (i = 0, len = ref.length; i < len; i++) {
             validator = ref[i];
@@ -41,7 +43,9 @@
         scope[props.model] = elem.value;
         app.$setScopeVar(props.model, elem.value, scope);
         if (typeof value !== 'undefined') {
-          formElement[props.name].$value = elem.value;
+          if (formElement != null) {
+            formElement[props.name].$value = elem.value;
+          }
         }
         return scope.$update();
       };
