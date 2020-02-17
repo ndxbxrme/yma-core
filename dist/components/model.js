@@ -41,7 +41,6 @@
           }
         }
         if (typeof value !== 'undefined') {
-          //scope[props.model] = elem.value
           if (formElement != null) {
             formElement[props.name].$value = elem.value;
           }
@@ -50,7 +49,7 @@
         updateData[props.model] = elem.value;
         return scope.$update(updateData);
       };
-      scope.$addEventListeners(elem, ['keyup', 'change', 'paste', 'mouseup'], updateModel);
+      scope.$addEventListeners(elem, ['keyup', 'change', 'paste'], updateModel);
       return scope.$on('update', setValue);
     };
   };

@@ -18,10 +18,9 @@ module.exports = (app) ->
       if formElement?[props.name].$validators
         for validator in formElement[props.name].$validators
           await validator elem.value
-      #scope[props.model] = elem.value
       formElement?[props.name].$value = elem.value if typeof(value) isnt 'undefined'
       updateData = {};
       updateData[props.model] = elem.value
       scope.$update(updateData)
-    scope.$addEventListeners elem, ['keyup', 'change', 'paste', 'mouseup'], updateModel
+    scope.$addEventListeners elem, ['keyup', 'change', 'paste'], updateModel
     scope.$on 'update', setValue
