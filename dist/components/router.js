@@ -164,7 +164,13 @@
         return {
           go: go,
           $on: callbacks.$on,
-          parsePath: parsePath
+          parsePath: parsePath,
+          name: function() {
+            return currentscene.name;
+          },
+          data: function() {
+            return currentscene.data;
+          }
         };
       }
     };

@@ -102,3 +102,5 @@ module.exports = (app) ->
     go: go
     $on: callbacks.$on
     parsePath: parsePath
+    name: -> currentscene.name
+    data: -> currentscene.data
