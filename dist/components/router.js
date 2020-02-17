@@ -166,10 +166,12 @@
           $on: callbacks.$on,
           parsePath: parsePath,
           name: function() {
-            return currentscene.name;
+            currentscene.name;
+            return app.$update('router');
           },
           data: function() {
-            return currentscene.data;
+            currentscene.data;
+            return app.$update('router');
           }
         };
       }

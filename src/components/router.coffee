@@ -102,5 +102,9 @@ module.exports = (app) ->
     go: go
     $on: callbacks.$on
     parsePath: parsePath
-    name: -> currentscene.name
-    data: -> currentscene.data
+    name: ->
+      currentscene.name
+      app.$update('router')
+    data: ->
+      currentscene.data
+      app.$update('router')
