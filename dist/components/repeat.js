@@ -5,14 +5,14 @@
     hashes = [];
     return {
       pre: function(scope, elem, props) {
-        var arr, itemName, repeat, results;
+        var arr, itemName, myrepeat, repeat, results;
         itemName = 'item';
         repeat = props.repeat;
-        repeat = repeat.replace(/\sas\s([\w_]+)$/, function(all, name) {
+        myrepeat = repeat.replace(/\sas\s([\w_]+)$/, function(all, name) {
           itemName = name;
           return '';
         });
-        arr = app.$eval(repeat, scope);
+        arr = app.$eval(myrepeat, scope);
         if (arr) {
           results = arr.map(function(item, i) {
             var hash, hashIndex, newscope;

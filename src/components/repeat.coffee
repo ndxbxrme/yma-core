@@ -3,10 +3,10 @@ module.exports = (app) ->
   pre: (scope, elem, props) ->
     itemName = 'item'
     repeat = props.repeat
-    repeat = repeat.replace /\sas\s([\w_]+)$/, (all, name) ->
+    myrepeat = repeat.replace /\sas\s([\w_]+)$/, (all, name) ->
       itemName = name
       ''
-    arr = app.$eval(repeat, scope)
+    arr = app.$eval(myrepeat, scope)
     if arr
       results = arr.map (item, i) ->
         hash = app.$hash JSON.stringify item
