@@ -93,8 +93,9 @@
         }
       }
       if (route !== window.location.pathname) {
-        return window.history.pushState(route, null, route);
+        window.history.pushState(route, null, route);
       }
+      return app.$update('router');
     };
     return {
       controller: function(scope, elem) {
@@ -166,12 +167,10 @@
           $on: callbacks.$on,
           parsePath: parsePath,
           name: function() {
-            currentscene.name;
-            return app.$update('router');
+            return currentscene.name;
           },
           data: function() {
-            currentscene.data;
-            return app.$update('router');
+            return currentscene.data;
           }
         };
       }

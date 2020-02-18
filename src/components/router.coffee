@@ -61,6 +61,7 @@ module.exports = (app) ->
       if r.length > route.length and not /:/.test r
         route = r
     window.history.pushState route, null, route if route isnt window.location.pathname
+    app.$update 'router'
   controller: (scope, elem) ->
     routerScope = scope
     if currentscene
@@ -104,7 +105,5 @@ module.exports = (app) ->
     parsePath: parsePath
     name: ->
       currentscene.name
-      app.$update('router')
     data: ->
       currentscene.data
-      app.$update('router')
