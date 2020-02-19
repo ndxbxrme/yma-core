@@ -5,7 +5,7 @@
     app.$postFetch = [];
     return function(options) {
       return new Promise(async function(resolve, reject) {
-        var e, fn, i, j, key, len, len1, ref, ref1, ref2, req, value;
+        var e, fn, i, j, key, len, len1, mockService, ref, ref1, ref2, req, resolveData, response, value;
         try {
           ref = app.$preFetch;
           for (i = 0, len = ref.length; i < len; i++) {
@@ -33,29 +33,39 @@
           }
         }
         req.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
-        return req.onreadystatechange = async function() {
+        if (mockService = app.$getSerivce('mocks')) {
+          if (response = (await mockService.$getResponse(req))) {
+            return resolveData(response);
+          }
+        }
+        resolveData = async function(response) {
           var k, l, len2, len3, ref3, ref4;
-          if (this.readyState === 4) {
-            try {
-              ref3 = app.$postFetch;
-              for (k = 0, len2 = ref3.length; k < len2; k++) {
-                fn = ref3[k];
-                await fn(this);
-              }
-              if (options.$postFetch) {
-                ref4 = options.$postFetch;
-                for (l = 0, len3 = ref4.length; l < len3; l++) {
-                  fn = ref4[l];
-                  await fn(this);
-                }
-              }
-            } catch (error) {
-              e = error;
-              return reject(e);
+          try {
+            ref3 = app.$postFetch;
+            for (k = 0, len2 = ref3.length; k < len2; k++) {
+              fn = ref3[k];
+              await fn(response);
             }
-            return resolve(this);
+            if (options.$postFetch) {
+              ref4 = options.$postFetch;
+              for (l = 0, len3 = ref4.length; l < len3; l++) {
+                fn = ref4[l];
+                await fn(response);
+              }
+            }
+          } catch (error) {
+            e = error;
+            return reject(e);
+          }
+          return resolve(response);
+        };
+        req.open(options.url, options.method, true);
+        req.onreadystatechange = function() {
+          if (this.readyState === 4) {
+            return resolveData(this);
           }
         };
+        return req.send(options.data);
       });
     };
   };

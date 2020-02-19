@@ -43,6 +43,7 @@ module.exports = (app) ->
       app.$addClass currentscene.scene, ['yma-router-parked', 'yma-transition-out']
       await app.$teardownChildren app.$makeId currentscene.scene
     await app.$teardownChildren app.$makeId nextscene.scene
+    currentscene.scene.innerHTML = ''
     currentscene = nextscene
     currentscene.data = data or {}
     routerScope.data = data

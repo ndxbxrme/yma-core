@@ -14,12 +14,19 @@ module.exports = (app) ->
       if options.headers
         req.setRequestHeader key, value for key, value of options.headers
       req.setRequestHeader 'Content-Type', 'application/x-www-form-urlencode'
+      if mockService = app.$getSerivce('mocks')
+        if response = await mockService.$getResponse req
+          return resolveData response
+      resolveData = (response) ->
+        try
+          await fn response for fn in app.$postFetch
+          if options.$postFetch
+            await fn response for fn in options.$postFetch
+        catch e
+          return reject e
+        resolve response
+      req.open options.url, options.method, true
       req.onreadystatechange = ->
-        if @.readyState is 4
-          try
-            await fn @ for fn in app.$postFetch
-            if options.$postFetch
-              await fn @ for fn in options.$postFetch
-          catch e
-            return reject e
-          resolve @
+        resolveData @ if @.readyState is 4
+
+      req.send options.data

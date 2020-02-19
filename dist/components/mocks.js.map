@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "mocks.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\mocks.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf,QAAA,CAAC,OAAD,CAAA;aACE,OAAO,CAAC,GAAR,CAAY,OAAZ;IADF;EADe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  (options) ->\r\n    console.log 'mocks'\r\n"
+  ]
+}

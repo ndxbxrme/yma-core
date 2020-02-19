@@ -11,3 +11,7 @@ module.exports =
   form:       require './components/form'
   required:   require './components/required'
   fetch:      require './components/fetch'
+  mocks:      require './components/mocks'
+  scene: (app) ->
+    controller: (scope) ->
+      console.log 'scene'
