@@ -13,14 +13,7 @@
     form: require('./components/form'),
     required: require('./components/required'),
     fetch: require('./components/fetch'),
-    mocks: require('./components/mocks'),
-    scene: function(app) {
-      return {
-        controller: function(scope) {
-          return console.log('scene');
-        }
-      };
-    }
+    mocks: require('./components/mocks')
   };
 
 }).call(this);

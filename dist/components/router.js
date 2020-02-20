@@ -67,7 +67,6 @@
       if (currentscene) {
         app.$removeClass(currentscene.scene, ['yma-router-active', 'yma-transition-in']);
         app.$addClass(currentscene.scene, ['yma-router-parked', 'yma-transition-out']);
-        console.log('i want to teardown', app.$makeId(currentscene.scene));
         await app.$teardownChildren(app.$makeId(currentscene.scene));
       }
       await app.$teardownChildren(app.$makeId(nextscene.scene));
