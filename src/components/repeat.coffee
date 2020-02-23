@@ -1,7 +1,7 @@
 module.exports = (app) ->
   hashes = []
   pre: (scope, elem, props) ->
-    itemName = 'item'
+    itemName = '$item'
     repeat = props.repeat
     myrepeat = repeat.replace /\sas\s([\w_]+)$/, (all, name) ->
       itemName = name
@@ -20,7 +20,7 @@ module.exports = (app) ->
         newscope.$moveUp = hashIndex > i
         newscope.$moveDown = hashIndex isnt -1 and hashIndex < i
         newscope.$lastIndex = hashIndex
-        #newscope.$dataid = app.$hash JSON.stringify app.$hashObject newscope
+        newscope.$dataHash = app.$hash JSON.stringify app.$hashObject item
         newscope
       if scope.$phase is 'render'
         hashes = results.map (scope) ->

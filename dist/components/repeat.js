@@ -6,7 +6,7 @@
     return {
       pre: function(scope, elem, props) {
         var arr, itemName, myrepeat, repeat, results;
-        itemName = 'item';
+        itemName = '$item';
         repeat = props.repeat;
         myrepeat = repeat.replace(/\sas\s([\w_]+)$/, function(all, name) {
           itemName = name;
@@ -27,7 +27,7 @@
             newscope.$moveUp = hashIndex > i;
             newscope.$moveDown = hashIndex !== -1 && hashIndex < i;
             newscope.$lastIndex = hashIndex;
-            //newscope.$dataid = app.$hash JSON.stringify app.$hashObject newscope
+            newscope.$dataHash = app.$hash(JSON.stringify(app.$hashObject(item)));
             return newscope;
           });
           if (scope.$phase === 'render') {
