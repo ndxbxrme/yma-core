@@ -6,7 +6,7 @@
         var ref;
         scope.$use('router');
         scope.router.addScene(props);
-        if (props.scene !== ((ref = scope.$scene) != null ? ref.name : void 0)) {
+        if (props.scene !== ((ref = scope.scene) != null ? ref.name : void 0)) {
           return [];
         }
         return null;

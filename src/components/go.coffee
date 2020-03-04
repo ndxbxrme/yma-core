@@ -4,4 +4,4 @@ module.exports = ->
     scene = scope.router.parsePath props.go
     listener = (event) ->
       scope.router.go scene.name, scene.data
-    scope.$addEventListeners elem, 'mousedown', listener
+    scope.$addEventListeners elem, 'click', listener

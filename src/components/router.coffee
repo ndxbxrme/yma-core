@@ -29,15 +29,15 @@ module.exports = (app) ->
       name: defaultScene.scene
       data: {}
   go = (name, data)->
-    routerScope.$scene =
-      scene: name
+    routerScope.scene =
+      name: name
       data: data
     routerScope.$update()
   controller: (scope, elem, props) ->
     routerScope = scope
     scope.$scene = null
     app.$once 'rendered', ->
-      scope.$scene = parsePath window.location.pathname
+      scope.scene = parsePath window.location.pathname
       scope.$update()
   service: ->
     go: go

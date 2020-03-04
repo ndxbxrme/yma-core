@@ -49,8 +49,8 @@
       };
     };
     go = function(name, data) {
-      routerScope.$scene = {
-        scene: name,
+      routerScope.scene = {
+        name: name,
         data: data
       };
       return routerScope.$update();
@@ -60,7 +60,7 @@
         routerScope = scope;
         scope.$scene = null;
         return app.$once('rendered', function() {
-          scope.$scene = parsePath(window.location.pathname);
+          scope.scene = parsePath(window.location.pathname);
           return scope.$update();
         });
       },

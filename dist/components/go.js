@@ -8,7 +8,7 @@
       listener = function(event) {
         return scope.router.go(scene.name, scene.data);
       };
-      return scope.$addEventListeners(elem, 'mousedown', listener);
+      return scope.$addEventListeners(elem, 'click', listener);
     };
   };
 

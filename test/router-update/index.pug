@@ -1,0 +1,11 @@
+app(app='myApp')
+  header
+    menu
+      a#goHome(go='/') home
+      a#goAbout(go='/about') about
+  router
+    .home(scene='home', route='/', default='true')
+      h1 home
+    .about(scene='about', route='/about')
+      h1 about
+script(src='dist/main.js')

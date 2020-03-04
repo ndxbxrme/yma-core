@@ -6,8 +6,8 @@
     "src\\components\\scene.coffee"
   ],
   "names": [],
-  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACP,YAAA;QAAI,KAAK,CAAC,IAAN,CAAW,QAAX;QACA,KAAK,CAAC,MAAM,CAAC,QAAb,CAAsB,KAAtB;QACA,IAAG,KAAK,CAAC,KAAN,wCAA6B,CAAE,cAAlC;AACE,iBAAO,GADT;;eAEA;MALG;IAAL;EADe;AAAjB",
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;WACf;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACP,YAAA;QAAI,KAAK,CAAC,IAAN,CAAW,QAAX;QACA,KAAK,CAAC,MAAM,CAAC,QAAb,CAAsB,KAAtB;QACA,IAAG,KAAK,CAAC,KAAN,uCAA4B,CAAE,cAAjC;AACE,iBAAO,GADT;;eAEA;MALG;IAAL;EADe;AAAjB",
   "sourcesContent": [
-    "module.exports = (app) ->\r\n  pre: (scope, elem, props) ->\r\n    scope.$use 'router'\r\n    scope.router.addScene props\r\n    if props.scene isnt scope.$scene?.name\r\n      return []\r\n    null\r\n"
+    "module.exports = (app) ->\r\n  pre: (scope, elem, props) ->\r\n    scope.$use 'router'\r\n    scope.router.addScene props\r\n    if props.scene isnt scope.scene?.name\r\n      return []\r\n    null\r\n"
   ]
 }
