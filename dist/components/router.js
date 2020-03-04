@@ -30,10 +30,8 @@
     };
     parsePath = function(pathname) {
       var data, name, scene;
-      console.log('pathname', pathname);
       for (name in scenes) {
         scene = scenes[name];
-        console.log('checking', name, scene);
         if (data = checkScenePath(pathname, scene.route)) {
           return {
             name: scene.scene,

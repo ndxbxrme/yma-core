@@ -18,9 +18,7 @@ module.exports = (app) ->
     else
       return null
   parsePath = (pathname) ->
-    console.log 'pathname', pathname
     for name, scene of scenes
-      console.log 'checking', name, scene
       if data = checkScenePath pathname, scene.route
         return
           name: scene.scene
