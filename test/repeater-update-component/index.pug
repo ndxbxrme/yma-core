@@ -1,0 +1,7 @@
+app(app='myApp')
+script#app(type='text/template')
+  h1#more(press='$update({noThings:++noThings})') more
+  h1#less(press='$update({noThings:--noThings})') less
+  h1#num {{noThings}}
+  h2(repeat='new Array(noThings).fill(0)') hello {{faker.name.firstName()}} {{$index}}
+script(src='dist/main.js')

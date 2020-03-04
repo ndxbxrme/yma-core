@@ -104,3 +104,68 @@ exports.ymaCoreTest =
     test.equals val, 10000
     await closePage()
     test.done()
+  "Should test repeater updating": (test) ->
+    makeServer 'test/repeater-update'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () -> document.querySelectorAll('h2').length
+    test.equals val, 6
+    await closePage()
+    test.done()
+  "Should test repeater updating - add one": (test) ->
+    makeServer 'test/repeater-update'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () ->
+      new Promise (resolve) ->
+        window.app.$once 'updated', ->
+          resolve document.querySelectorAll('h2').length
+        document.getElementById('more').click()
+    test.equals val, 7
+    await closePage()
+    test.done()
+  "Should test repeater updating - minus one": (test) ->
+    makeServer 'test/repeater-update'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () ->
+      new Promise (resolve) ->
+        window.app.$once 'updated', ->
+          resolve document.querySelectorAll('h2').length
+        document.getElementById('less').click()
+    test.equals val, 5
+    await closePage()
+    test.done()
+
+  "Should test component repeater updating": (test) ->
+    makeServer 'test/repeater-update-component'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () -> document.querySelectorAll('h2').length
+    test.equals val, 6
+    await closePage()
+    test.done()
+  "Should test component repeater updating - add one": (test) ->
+    makeServer 'test/repeater-update-component'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () ->
+      new Promise (resolve) ->
+        window.app.$once 'updated', ->
+          resolve document.querySelectorAll('h2').length
+        document.getElementById('more').click()
+    test.equals val, 7
+    await closePage()
+    test.done()
+  "Should test component repeater updating - minus one": (test) ->
+    makeServer 'test/repeater-update-component'
+    await gotoPage ''
+    await waitForRendered()
+    val = await page.evaluate () ->
+      new Promise (resolve) ->
+        window.app.$once 'updated', ->
+          resolve document.querySelectorAll('h2').length
+        document.getElementById('less').click()
+    test.equals val, 5
+    await closePage()
+    test.done()

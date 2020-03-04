@@ -1,0 +1,1 @@
+<app app="myApp"></app><script id="app" type="text/template"><h1 id="more" press="$update({noThings:++noThings})">more</h1><h1 id="less" press="$update({noThings:--noThings})">less</h1><h1 id="num">{{noThings}}</h1><h2 repeat="new Array(noThings).fill(0)">hello {{faker.name.firstName()}} {{$index}}</h2></script><script src="dist/main.js"></script>
