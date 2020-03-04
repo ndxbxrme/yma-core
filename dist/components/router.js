@@ -29,9 +29,13 @@
       }
     };
     parsePath = function(pathname) {
-      var data, name, scene;
+      var data, defaultScene, name, scene;
+      defaultScene = null;
       for (name in scenes) {
         scene = scenes[name];
+        if (scene.default) {
+          defaultScene = scene;
+        }
         if (data = checkScenePath(pathname, scene.route)) {
           return {
             name: scene.scene,
@@ -39,6 +43,10 @@
           };
         }
       }
+      return {
+        name: defaultScene.scene,
+        data: {}
+      };
     };
     go = function(name, data) {
       routerScope.$scene = {

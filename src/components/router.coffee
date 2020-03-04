@@ -18,11 +18,16 @@ module.exports = (app) ->
     else
       return null
   parsePath = (pathname) ->
+    defaultScene = null
     for name, scene of scenes
+      defaultScene = scene if scene.default
       if data = checkScenePath pathname, scene.route
         return
           name: scene.scene
           data: data
+    return
+      name: defaultScene.scene
+      data: {}
   go = (name, data)->
     routerScope.$scene =
       scene: name
