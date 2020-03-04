@@ -1,7 +1,7 @@
 module.exports = (app) ->
   app.$preFetch = []
   app.$postFetch = []
-  (options) ->
+  $fetch: (options) ->
     new Promise (resolve, reject) ->
       try
         await fn options for fn in app.$preFetch

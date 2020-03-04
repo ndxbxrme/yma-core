@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "scene.js",
+  "sourceRoot": "..\\..",
+  "sources": [
+    "src\\components\\scene.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GAAiB,QAAA,CAAC,GAAD,CAAA;IACf,OAAO,CAAC,GAAR,CAAY,OAAZ;WACA;MAAA,GAAA,EAAK,QAAA,CAAC,KAAD,EAAQ,IAAR,EAAc,KAAd,CAAA;AACP,YAAA,GAAA,EAAA;QAAI,OAAO,CAAC,GAAR,CAAY,WAAZ;QACA,KAAK,CAAC,IAAN,CAAW,QAAX;QACA,KAAK,CAAC,MAAM,CAAC,QAAb,CAAsB,KAAtB;QACA,OAAO,CAAC,GAAR,CAAY,KAAK,CAAC,KAAlB,oCAAqC,CAAE,aAAvC;QACA,IAAG,KAAK,CAAC,KAAN,0CAA6B,CAAE,cAAlC;UACE,OAAO,CAAC,GAAR,CAAY,wBAAZ;AACA,iBAAO,GAFT;;eAGA;MARG;IAAL;EAFe;AAAjB",
+  "sourcesContent": [
+    "module.exports = (app) ->\r\n  console.log 'scene'\r\n  pre: (scope, elem, props) ->\r\n    console.log 'scene pre'\r\n    scope.$use 'router'\r\n    scope.router.addScene props\r\n    console.log props.scene, scope.$scene?.name\r\n    if props.scene isnt scope.$scene?.name\r\n      console.log 'returning empty handed'\r\n      return []\r\n    null\r\n"
+  ]
+}

@@ -8,6 +8,7 @@
     repeat: require('./components/repeat'),
     controller: require('./components/controller'),
     router: require('./components/router'),
+    scene: require('./components/scene'),
     model: require('./components/model'),
     autofocus: require('./components/autofocus'),
     form: require('./components/form'),

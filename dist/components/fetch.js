@@ -3,70 +3,72 @@
   module.exports = function(app) {
     app.$preFetch = [];
     app.$postFetch = [];
-    return function(options) {
-      return new Promise(async function(resolve, reject) {
-        var e, fn, i, j, key, len, len1, mockService, ref, ref1, ref2, req, resolveData, response, value;
-        try {
-          ref = app.$preFetch;
-          for (i = 0, len = ref.length; i < len; i++) {
-            fn = ref[i];
-            await fn(options);
-          }
-          if (options.$preFetch) {
-            ref1 = options.$preFetch;
-            for (j = 0, len1 = ref1.length; j < len1; j++) {
-              fn = ref1[j];
+    return {
+      $fetch: function(options) {
+        return new Promise(async function(resolve, reject) {
+          var e, fn, i, j, key, len, len1, mockService, ref, ref1, ref2, req, resolveData, response, value;
+          try {
+            ref = app.$preFetch;
+            for (i = 0, len = ref.length; i < len; i++) {
+              fn = ref[i];
               await fn(options);
             }
-          }
-        } catch (error) {
-          e = error;
-          return reject(e);
-        }
-        options.method = options.method || 'GET';
-        req = new XMLHttpRequest();
-        if (options.headers) {
-          ref2 = options.headers;
-          for (key in ref2) {
-            value = ref2[key];
-            req.setRequestHeader(key, value);
-          }
-        }
-        req.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
-        if (mockService = app.$getSerivce('mocks')) {
-          if (response = (await mockService.$getResponse(req))) {
-            return resolveData(response);
-          }
-        }
-        resolveData = async function(response) {
-          var k, l, len2, len3, ref3, ref4;
-          try {
-            ref3 = app.$postFetch;
-            for (k = 0, len2 = ref3.length; k < len2; k++) {
-              fn = ref3[k];
-              await fn(response);
-            }
-            if (options.$postFetch) {
-              ref4 = options.$postFetch;
-              for (l = 0, len3 = ref4.length; l < len3; l++) {
-                fn = ref4[l];
-                await fn(response);
+            if (options.$preFetch) {
+              ref1 = options.$preFetch;
+              for (j = 0, len1 = ref1.length; j < len1; j++) {
+                fn = ref1[j];
+                await fn(options);
               }
             }
           } catch (error) {
             e = error;
             return reject(e);
           }
-          return resolve(response);
-        };
-        req.open(options.url, options.method, true);
-        req.onreadystatechange = function() {
-          if (this.readyState === 4) {
-            return resolveData(this);
+          options.method = options.method || 'GET';
+          req = new XMLHttpRequest();
+          if (options.headers) {
+            ref2 = options.headers;
+            for (key in ref2) {
+              value = ref2[key];
+              req.setRequestHeader(key, value);
+            }
           }
-        };
-        return req.send(options.data);
-      });
+          req.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
+          if (mockService = app.$getSerivce('mocks')) {
+            if (response = (await mockService.$getResponse(req))) {
+              return resolveData(response);
+            }
+          }
+          resolveData = async function(response) {
+            var k, l, len2, len3, ref3, ref4;
+            try {
+              ref3 = app.$postFetch;
+              for (k = 0, len2 = ref3.length; k < len2; k++) {
+                fn = ref3[k];
+                await fn(response);
+              }
+              if (options.$postFetch) {
+                ref4 = options.$postFetch;
+                for (l = 0, len3 = ref4.length; l < len3; l++) {
+                  fn = ref4[l];
+                  await fn(response);
+                }
+              }
+            } catch (error) {
+              e = error;
+              return reject(e);
+            }
+            return resolve(response);
+          };
+          req.open(options.url, options.method, true);
+          req.onreadystatechange = function() {
+            if (this.readyState === 4) {
+              return resolveData(this);
+            }
+          };
+          return req.send(options.data);
+        });
+      }
     };
   };
 

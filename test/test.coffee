@@ -10,9 +10,8 @@ makeServer = (path) ->
     port: 23232
     directory: path
     spa: 'index.html'
-gotoPage = (path) ->
-  browser = await puppeteer.launch
-    headless: true
+gotoPage = (path, puppeteerOptions) ->
+  browser = await puppeteer.launch puppeteerOptions
   page = await browser.newPage()
   await page.goto 'http://localhost:23232/' + (path or '')
 closePage = ->
@@ -21,9 +20,12 @@ closePage = ->
 waitForRendered = ->
   await page.evaluate () ->
     new Promise (resolve) ->
-      window.app.$on 'rendered', ->
+      window.app.$once 'rendered', ->
         resolve()
       window.app.render()
+sleep = (time) ->
+  new Promise (resolve) ->
+    setTimeout resolve, time
 
 exports.ymaCoreTest =
   "Should autofocus first input": (test) ->
@@ -38,35 +40,40 @@ exports.ymaCoreTest =
     makeServer 'test/router-basic'
     await gotoPage ''
     await waitForRendered()
-    test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-active')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-parked')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="users"].yma-router-parked')
+    str = await page.evaluate () -> document.querySelector('app').innerText
+    test.equals str, 'home'
     await closePage()
     test.done()
   "Should display about scene": (test) ->
     makeServer 'test/router-basic'
     await gotoPage 'about'
     await waitForRendered()
-    test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-active')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-parked')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="users"].yma-router-parked')
+    str = await page.evaluate () -> document.querySelector('app').innerText
+    test.equals str, 'about'
     await closePage()
     test.done()
   "Should display users scene": (test) ->
     makeServer 'test/router-basic'
     await gotoPage 'users'
     await waitForRendered()
-    test.ok await page.evaluate () -> document.querySelector('scene[name="users"].yma-router-active')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-parked')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-parked')
+    str = await page.evaluate () -> document.querySelector('app').innerText
+    test.equals str, 'users'
     await closePage()
     test.done()
   "Should display router component": (test) ->
     makeServer 'test/router-components'
     await gotoPage ''
     await waitForRendered()
-    test.ok await page.evaluate () -> document.querySelector('scene[name="home"].yma-router-active')
-    test.ok await page.evaluate () -> document.querySelector('scene[name="about"].yma-router-parked')
+    str = await page.evaluate () -> document.querySelector('router').innerText
+    test.equals str, 'home'
+    await closePage()
+    test.done()
+  "Should display router about component": (test) ->
+    makeServer 'test/router-components'
+    await gotoPage 'about'
+    await waitForRendered()
+    str = await page.evaluate () -> document.querySelector('router').innerText
+    test.equals str, 'about'
     await closePage()
     test.done()
   "Should press a button and update scope variable": (test) ->

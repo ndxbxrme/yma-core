@@ -1,9 +1,9 @@
 app(app='myApp')
   router
-    scene(name='home', route='/', default='true')
+    .home(scene='home', route='/', default='true')
       h1 home
-    scene(name='about', route='/about')
+    .about(scene='about', route='/about')
       h1 about
-    scene(name='users', route='/users')
+    .users(scene='users', route='/users')
       h1 users
 script(src='dist/main.js')
