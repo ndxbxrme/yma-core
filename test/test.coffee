@@ -96,6 +96,20 @@ exports.ymaCoreTest =
     test.equals str, 'about'
     await closePage()
     test.done()
+  "Should display about scene then go home (update)": (test) ->
+    makeServer 'test/router-update'
+    await gotoPage ''
+    await waitForRendered()
+    str = await page.evaluate () ->
+      new Promise (resolve) ->
+        window.app.$once 'updated', ->
+          window.app.$once 'updated', ->
+            resolve document.querySelector('router').innerText
+          document.querySelector('#goHome').click()
+        document.querySelector('#goAbout').click()
+    test.equals str, 'home'
+    await closePage()
+    test.done()
   "Should press a button and update scope variable": (test) ->
     makeServer 'test/press-basic'
     await gotoPage ''

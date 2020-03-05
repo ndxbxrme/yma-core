@@ -155,6 +155,26 @@
       await closePage();
       return test.done();
     },
+    "Should display about scene then go home (update)": async function(test) {
+      var str;
+      makeServer('test/router-update');
+      await gotoPage('');
+      await waitForRendered();
+      str = (await page.evaluate(function() {
+        return new Promise(function(resolve) {
+          window.app.$once('updated', function() {
+            window.app.$once('updated', function() {
+              return resolve(document.querySelector('router').innerText);
+            });
+            return document.querySelector('#goHome').click();
+          });
+          return document.querySelector('#goAbout').click();
+        });
+      }));
+      test.equals(str, 'home');
+      await closePage();
+      return test.done();
+    },
     "Should press a button and update scope variable": async function(test) {
       var val;
       makeServer('test/press-basic');
