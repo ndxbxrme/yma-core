@@ -31,6 +31,7 @@
     parsePath = function(pathname) {
       var data, defaultScene, name, scene;
       defaultScene = null;
+      console.log('parse', pathname, scenes);
       for (name in scenes) {
         scene = scenes[name];
         if (scene.default) {

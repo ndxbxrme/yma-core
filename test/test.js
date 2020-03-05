@@ -102,6 +102,18 @@
       await closePage();
       return test.done();
     },
+    "Should display default scene": async function(test) {
+      var str;
+      makeServer('test/router-default');
+      await gotoPage('');
+      await waitForRendered();
+      str = (await page.evaluate(function() {
+        return document.querySelector('app').innerText;
+      }));
+      test.equals(str, 'about');
+      await closePage();
+      return test.done();
+    },
     "Should display router component": async function(test) {
       var str;
       makeServer('test/router-components');

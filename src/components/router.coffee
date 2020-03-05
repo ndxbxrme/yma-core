@@ -19,6 +19,7 @@ module.exports = (app) ->
       return null
   parsePath = (pathname) ->
     defaultScene = null
+    console.log 'parse', pathname, scenes
     for name, scene of scenes
       defaultScene = scene if scene.default
       if data = checkScenePath pathname, scene.route

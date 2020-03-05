@@ -60,6 +60,14 @@ exports.ymaCoreTest =
     test.equals str, 'users'
     await closePage()
     test.done()
+  "Should display default scene": (test) ->
+    makeServer 'test/router-default'
+    await gotoPage ''
+    await waitForRendered()
+    str = await page.evaluate () -> document.querySelector('app').innerText
+    test.equals str, 'about'
+    await closePage()
+    test.done()
   "Should display router component": (test) ->
     makeServer 'test/router-components'
     await gotoPage ''
